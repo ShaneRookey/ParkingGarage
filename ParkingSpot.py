@@ -13,12 +13,10 @@ class ParkingSpot:
 
     # get size of spot
     def get_size_of_spot(self):
-        return self.size_of_spot
-
-    # get size of spot
-    def set_size_of_spot(self, size):
-        self.size_of_spot = size
-    pass
+        if self.occupied == 1:
+            return 'X'
+        else:
+            return self.size_of_spot
 
     # print statement to debug easier
     def print_parking_spot(self):
@@ -26,21 +24,21 @@ class ParkingSpot:
             print("occupied by ")
             print(self.vehicle)
         else:
-            print("size of spot is " + str(self.size_of_spot))
+            print(str(self.size_of_spot))
 
     # I want to store a vehicle here in my parking spot
     def store_vehicle_in_spot(self, vehicle):
-        if not self.is_occupied():
-            if vehicle.get_size_of_vehicle == 3:  # if bus use different method within parking garage
-                ParkingGarage.store_bus_in_spots(vehicle)
-            else:  # if not a bus- vehicle can park normally
-                if vehicle.get_size_of_vehicle() <= self.size_of_spot:
-                    self.occupied = 1  # occupy spot
-                    self.vehicle = vehicle
-                else:
-                    print("does not fit!")
+        if not self.is_occupied():  # if the spot is open
+            if vehicle.get_size_of_vehicle() <= self.size_of_spot:  # if the vehicle is smaller or equal to size of spot, it can park
+                self.occupied = 1  # occupy spot
+                self.vehicle = vehicle  # set the vehicle that is parked in the spot
+                return True
+            else:
+                print("does not fit!")  # vehicle does not fit
+                return False
         else:
-            print("occupied!")
+            print("occupied!")  #  If spot is taken
+            return False
 
     # need to know if spot is occupied
     def is_occupied(self):
@@ -49,6 +47,7 @@ class ParkingSpot:
         elif self.occupied == 0:
             return False
 
+    # set occupied flag
     def set_occupied(self, boolean):
         if boolean:
             self.occupied = 1
