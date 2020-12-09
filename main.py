@@ -117,19 +117,30 @@ def test_parking_a_vehicle_in_garage():
 
 
 def test_bus_storage():
-    number_of_levels = 2
-    number_of_rows = 5
-    number_of_spots_per_row = 5
+    number_of_levels = 5
+    number_of_rows = 6
+    number_of_spots_per_row = 15
 
     parking_garage1 = ParkingGarage.ParkingGarage(number_of_levels, number_of_rows, number_of_spots_per_row)
     bus1 = Vehicles.Bus()
     bus2 = Vehicles.Bus()
+    bus3 = Vehicles.Bus()
+    bus4 = Vehicles.Bus()
+    bus5 = Vehicles.Bus()
+    bus6 = Vehicles.Bus()
+    motorcycle1 = Vehicles.Motorcycle()
+    compact_car1 = Vehicles.Compact()
     parking_garage1.print_parking_garage()  # print before parking the bus
 
     # loop to see if bus fits anywhere in garage
     bus1.park_vehicle(parking_garage1)  # busses try to park anywhere
     bus2.park_vehicle(parking_garage1)
-
+    bus3.park_vehicle(parking_garage1)  # busses try to park anywhere
+    bus4.park_vehicle(parking_garage1)
+    bus5.park_vehicle(parking_garage1)  # busses try to park anywhere
+    bus6.park_vehicle(parking_garage1)
+    motorcycle1.park_vehicle(parking_garage1.spot_array[8])
+    compact_car1.park_vehicle(parking_garage1.spot_array[2])
     parking_garage1.print_parking_garage()  # if bus is sucessful to park we should see 5 X in a row
 
     pass

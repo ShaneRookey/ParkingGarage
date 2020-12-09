@@ -1,6 +1,5 @@
-import ParkingSpot
-# Vehicle Classes
 
+# Vehicle Classes
 class Vehicle:
     size = 0
     parking_spot = 0  # need to reference the spot this vehicle is in
@@ -66,5 +65,3 @@ class Bus(Vehicle):
                 self.parked_flag = 1
         else:
             print("this vehicle is parked already")
-
-
