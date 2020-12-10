@@ -55,5 +55,4 @@ class test_Vehicles(unittest.TestCase):
         self.assertEqual(car.get_parking_spot(), parking3)
         pass
 
-if __name__ == 'main':
-    unittest.main()
+

@@ -34,7 +34,6 @@ class Vehicle:
             else:
                 return False
         else:
-            print("this vehicle is parked already")
             return False
 
     # get size of vehicle
@@ -70,7 +69,6 @@ class Bus(Vehicle):
             else:
                 return False
         else:
-            print("this vehicle is parked already")
             return False
 
     # get size of vehicle

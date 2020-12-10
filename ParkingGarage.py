@@ -57,5 +57,4 @@ class ParkingGarage:
                 else:
                     large_spots = 0
         if not parked:
-            print("\nThere was no room for the bus!")
             return False

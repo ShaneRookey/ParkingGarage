@@ -28,7 +28,6 @@ class ParkingSpot:
                 self.set_vehicle(vehicle)
                 return True
             else:
-                print("does not fit!")
                 return False
         else:
             return False
