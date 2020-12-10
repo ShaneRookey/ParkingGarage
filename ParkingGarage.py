@@ -4,14 +4,13 @@ import random
 
 # a parking garage class
 class ParkingGarage:
-    spot_array = []
-    total_spots = 0
 
     def __init__(self, levels, rows, spots_per_row):
         self.levels = levels
         self.rows = rows
         self.spots_per_row = spots_per_row
         self.total_spots = spots_per_row*rows*levels
+        self.spot_array = []
         self.create_spot_array(self.spots_per_row)
         pass
 
@@ -24,11 +23,11 @@ class ParkingGarage:
                 print()
                 if spots == self.spots_per_row*self.rows or (spots % (self.spots_per_row*self.rows)) == 0:
                     print()
-                    print(self.spot_array[spots].get_size_of_spot(), end=' ')
+                    self.spot_array[spots].print_parking_spot()
                 else:
-                    print(self.spot_array[spots].get_size_of_spot(), end=' ')
+                    self.spot_array[spots].print_parking_spot()
             else:
-                print(self.spot_array[spots].get_size_of_spot(), end=' ')
+                self.spot_array[spots].print_parking_spot()
         pass
 
     def create_spot_array(self, spots_per_row):
@@ -43,27 +42,20 @@ class ParkingGarage:
         large_spots = 0
         parked = False
         for spot in range(self.total_spots):
-            if not parked:                  # bus is not parked and  spot is not occupied or too small
+            if not parked:
                 if not self.spot_array[spot].is_occupied() and (self.spot_array[spot].get_size_of_spot() == 3) and \
-                        not(spot % self.spots_per_row == 0):  # checks for new rows
-                    large_spots += 1  # count a large spot
-                    if large_spots == 5:  # if fifth spot in a row, occupy those spots, assign the bus to that spot
-                        self.spot_array[spot].occupied = 1  # occupy spot
-                        self.spot_array[spot - 1].occupied = 1  # occupy spot
-                        self.spot_array[spot - 2].occupied = 1  # occupy spot
-                        self.spot_array[spot - 3].occupied = 1  # occupy spot
-                        self.spot_array[spot - 4].occupied = 1  # occupy spot
-                        self.spot_array[spot].vehicle = bus  # set the vehicle that is parked in the spot
-                        self.spot_array[spot - 1].vehicle = bus  # set the vehicle that is parked in the spot
-                        self.spot_array[spot - 2].vehicle = bus  # set the vehicle that is parked in the spot
-                        self.spot_array[spot - 3].vehicle = bus  # set the vehicle that is parked in the spot
-                        self.spot_array[spot - 4].vehicle = bus  # set the vehicle that is parked in the spot
+                        not(spot % self.spots_per_row == 0):
+                    large_spots += 1
+                    if large_spots == 5:
+                        self.spot_array[spot].store_vehicle_in_spot(bus)
+                        self.spot_array[spot - 1].store_vehicle_in_spot(bus)
+                        self.spot_array[spot - 2].store_vehicle_in_spot(bus)
+                        self.spot_array[spot - 3].store_vehicle_in_spot(bus)
+                        self.spot_array[spot - 4].store_vehicle_in_spot(bus)
                         parked = True
+                        return True
                 else:
                     large_spots = 0
-            else:
-                break
         if not parked:
             print("\nThere was no room for the bus!")
-        else:
-            print("\nbus was parked")
+            return False

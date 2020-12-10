@@ -1,26 +1,21 @@
 
 # Vehicle Classes
 class Vehicle:
-    size = 0
-    parking_spot = 0  # need to reference the spot this vehicle is in
-    parked_flag = 0  # 0 is not parked  1 is parked
 
     # Initiate Vehicle
     def __init__(self):
+        self.parking_spot = 0
+        self.parked_flag = 0
         pass
-
-    # get size of Vehicle
-    def get_size_of_vehicle(self):
-        return self.size
 
     # print for debugging
     def print_vehicle(self):
-        switcher = {
-            1: "Motorcycle",
-            2: "Compact Car",       # dictionary as switch statement for sizes
-            3: "Bus"
+        size_switcher = {
+            1: "M",
+            2: "C",       # dictionary as switch statement for sizes
+            3: "B"
         }
-        print(switcher.get(self.size))
+        return size_switcher.get(self.size)
 
     # is the car parked? return true if yes
     def is_parked(self):
@@ -35,12 +30,20 @@ class Vehicle:
             if parking_spot.store_vehicle_in_spot(self):
                 self.parking_spot = parking_spot
                 self.parked_flag = 1
+                return True
+            else:
+                return False
         else:
             print("this vehicle is parked already")
+            return False
 
     # get size of vehicle
     def get_parking_spot(self):
         return self.parking_spot
+
+    # get size of Vehicle
+    def get_size_of_vehicle(self):
+        return self.size
 
 
 # Motorcycle class - can park in any spot
@@ -63,5 +66,13 @@ class Bus(Vehicle):
             if parking_garage.store_bus_in_spots(self):
                 self.parking_spot = parking_garage
                 self.parked_flag = 1
+                return True
+            else:
+                return False
         else:
             print("this vehicle is parked already")
+            return False
+
+    # get size of vehicle
+    def get_parking_spot(self):
+        return self.parking_spot
